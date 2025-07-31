@@ -15,8 +15,9 @@ const RepositoriesPage = () => {
         margin: 'auto 0',
         backgroundColor: theme.palette.background.paper,
         borderRadius: '4px',
-        border: `1px solid ${(theme.palette.background as any).gray}`,
+        border: `1px solid ${(theme.palette as any).border.gray}`,
         display: 'flex',
+        overflow: 'hidden'
       })}>
         <div style={{
           flex: 1,

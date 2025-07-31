@@ -1,38 +1,69 @@
 import React from "react";
-import { Box, List, ListItem, ListItemText, Typography } from "@mui/material";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+  ListItemButton,
+} from "@mui/material";
 import { useRepositoriesList } from "../../hooks/repositories";
+import { Repository } from "../../apis/api";
+
+const infoBoxStyled = { display: 'flex', justifyContent:'center', p: 2 };
 
 const RepositoriesList = () => {
   const { data: repos, isLoading } = useRepositoriesList();
+
+  const handleRepoItemClick = (repo: Repository) => {
+    console.log(repo);
+  };
+
   return (
-    <Box sx={(theme) => ({
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      borderRight: `1px solid ${(theme.palette.background as any).gray}`,
-    })}>
-      <Typography variant="h6" sx={{ p: 2 }}>
-        HEADER
+    <Box
+      sx={(theme) => ({
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        borderRight: `1px solid ${(theme.palette as any).border.gray}`,
+      })}
+    >
+      <Typography
+        variant="h6"
+        sx={(theme) => ({
+          background: (theme.palette.background as any).gray,
+          display: "flex",
+          justifyContent: "center",
+          borderBottom: `1px solid ${(theme.palette as any).border.gray}`,
+          p: 1,
+        })}
+      >
+        Repositories
       </Typography>
       {isLoading ? (
-        <Box sx={{ p: 2 }}>Loading...</Box>
+        <Box sx={infoBoxStyled}>Loading...</Box>
       ) : repos && repos.length > 0 ? (
         <Box
           sx={{
             flex: 1,
-            overflowY: "auto", // scroll vertical si se necesita
+            overflowY: "auto",
           }}
         >
           <List>
             {repos.map((repo) => (
-              <ListItem key={repo.id} divider>
-                <ListItemText primary={repo.full_name} secondary={repo.description}/>
-              </ListItem>
+              <ListItemButton onClick={(event) => handleRepoItemClick(repo)}>
+                <ListItem key={repo.id} divider>
+                  <ListItemText
+                    primary={repo.full_name}
+                    secondary={repo.description}
+                  />
+                </ListItem>
+              </ListItemButton>
             ))}
           </List>
         </Box>
       ) : (
-        <Box sx={{ p: 2 }}>No data</Box>
+        <Box sx={infoBoxStyled}>No data</Box>
       )}
     </Box>
   );
