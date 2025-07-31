@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import {
   Box,
   List,
@@ -10,13 +10,21 @@ import {
 import { useRepositoriesList } from "../../hooks/repositories";
 import { Repository } from "../../apis/api";
 
-const infoBoxStyled = { display: 'flex', justifyContent:'center', p: 2 };
+const infoBoxStyled = { display: "flex", justifyContent: "center", p: 2 };
 
-const RepositoriesList = () => {
+interface RepositoriesListProps {
+  handleCurrentRepo: Dispatch<SetStateAction<Repository | null>>;
+}
+
+const RepositoriesList: React.FC<RepositoriesListProps> = ({
+  handleCurrentRepo,
+}) => {
+  const [idRepoSelected, setRepoSelected] = useState(0);
   const { data: repos, isLoading } = useRepositoriesList();
 
   const handleRepoItemClick = (repo: Repository) => {
-    console.log(repo);
+    setRepoSelected(repo.id);
+    handleCurrentRepo(repo);
   };
 
   return (
@@ -51,7 +59,10 @@ const RepositoriesList = () => {
         >
           <List>
             {repos.map((repo) => (
-              <ListItemButton onClick={(event) => handleRepoItemClick(repo)}>
+              <ListItemButton
+                selected={repo.id === idRepoSelected}
+                onClick={(event) => handleRepoItemClick(repo)}
+              >
                 <ListItem key={repo.id} divider>
                   <ListItemText
                     primary={repo.full_name}

@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import CommonLayout from "../../components/CommonLayout";
 import Box from '@mui/material/Box';
 import RepositoriesList from "./List";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Repository } from "../../apis/api";
 
 const queryClient = new QueryClient();
 
 const RepositoriesPage = () => {
+  const [currentRepo, setCurrentRepo] = useState<Repository | null>(null);
   return (
     <QueryClientProvider client={queryClient}>
       <CommonLayout>
@@ -22,11 +25,13 @@ const RepositoriesPage = () => {
         <div style={{
           flex: 1,
         }}>
-          <RepositoriesList />
+          <RepositoriesList handleCurrentRepo={setCurrentRepo}/>
         </div>
         <div style={{
           flex: 2,
-        }}>Detalle</div>
+        }}>
+          {currentRepo ? currentRepo.full_name : "No repo selected" }
+        </div>
       </Box>
     </CommonLayout>
     </QueryClientProvider>
