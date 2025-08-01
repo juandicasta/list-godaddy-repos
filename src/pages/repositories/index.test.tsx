@@ -4,6 +4,7 @@ import { Repository } from "../../apis/api";
 import { ThemeProvider } from "@mui/material/styles";
 import MainTheme from "../../components/MainTheme";
 import { repositories } from "../../apis/requests";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const mockRepos = [
   {
@@ -41,10 +42,13 @@ jest.mock("../../apis/requests");
 const mockRepositories = repositories as jest.Mocked<typeof repositories>;
 
 const RenderComponent = () => {
+  const queryClient = new QueryClient();
   render(
-    <ThemeProvider theme={MainTheme}>
-      <RepositoriesPage />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={MainTheme}>
+        <RepositoriesPage />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

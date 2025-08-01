@@ -7,15 +7,14 @@ const config: Config = {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   transformIgnorePatterns: [
-    '/node_modules/(?!axios)', // importante para transformar axios (ESM)
+    '/node_modules/',
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   globals: {
     'ts-jest': {
-      useESM: true,
+      useESM: false,
     },
   },
-  extensionsToTreatAsEsm: ['.ts', '.tsx'],
 };
 
 export default config;
