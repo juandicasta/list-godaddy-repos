@@ -1,14 +1,9 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import RepositoriesPage from "./index";
 import { Repository } from "../../apis/api";
 import { ThemeProvider } from "@mui/material/styles";
 import MainTheme from "../../components/MainTheme";
 import { repositories } from "../../apis/requests";
-
-import axios from "axios";
-
-jest.mock("axios");
-const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 const mockRepos = [
   {
@@ -55,8 +50,7 @@ const RenderComponent = () => {
 
 describe("RepositoriesPage", () => {
   it("show list of repositories and no datail component", async () => {
-    //mockRepositories.index.mockResolvedValueOnce(mockRepos);
-    mockedAxios.get.mockResolvedValueOnce({ data: mockRepos });
+    mockRepositories.index.mockResolvedValueOnce(mockRepos);
 
     RenderComponent();
 
