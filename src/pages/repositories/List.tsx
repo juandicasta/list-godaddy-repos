@@ -7,20 +7,23 @@ import {
   Typography,
   ListItemButton,
 } from "@mui/material";
-import { useRepositoriesList } from "./hooks/repositories";
 import { Repository } from "../../apis/api";
 
 const infoBoxStyled = { display: "flex", justifyContent: "center", p: 2 };
 
 interface RepositoriesListProps {
   handleCurrentRepo: Dispatch<SetStateAction<Repository | null>>;
+  repositories?: Repository[];
+  isLoading: boolean;
+
 }
 
 const RepositoriesList: React.FC<RepositoriesListProps> = ({
   handleCurrentRepo,
+  repositories,
+  isLoading
 }) => {
   const [idRepoSelected, setRepoSelected] = useState(0);
-  const { data: repos, isLoading } = useRepositoriesList();
 
   const handleRepoItemClick = (repo: Repository) => {
     setRepoSelected(repo.id);
@@ -50,7 +53,7 @@ const RepositoriesList: React.FC<RepositoriesListProps> = ({
       </Typography>
       {isLoading ? (
         <Box sx={infoBoxStyled}>Loading...</Box>
-      ) : repos && repos.length > 0 ? (
+      ) : repositories && repositories.length > 0 ? (
         <Box
           sx={{
             flex: 1,
@@ -58,7 +61,7 @@ const RepositoriesList: React.FC<RepositoriesListProps> = ({
           }}
         >
           <List>
-            {repos.map((repo) => (
+            {repositories.map((repo) => (
               <ListItemButton
                 selected={repo.id === idRepoSelected}
                 onClick={(event) => handleRepoItemClick(repo)}
