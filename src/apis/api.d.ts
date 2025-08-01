@@ -4,6 +4,11 @@ export type Repository = {
   full_name: string;
   description: string;
   owner: OwnerRepository;
+  language: string;
+  forks_count: number;
+  open_issues_count: number;
+  watchers_count: number;
+  html_url: string;
 };
 
 export type OwnerRepository = {

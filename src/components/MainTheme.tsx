@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import LenguagesColors from './LenguagesColors.json';
 
 const MainTheme = createTheme({
   palette: {
@@ -9,7 +10,8 @@ const MainTheme = createTheme({
     } as any,
     border: {
       gray: '#919497'
-    }
+    },
+    lenguagesColors: LenguagesColors.lenguages,
   } as any,
 });
 

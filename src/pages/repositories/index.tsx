@@ -2,6 +2,7 @@ import { useState } from 'react';
 import CommonLayout from "../../components/CommonLayout";
 import Box from '@mui/material/Box';
 import RepositoriesList from "./List";
+import RepositoriesDetail from './Detail';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Repository } from "../../apis/api";
 
@@ -30,7 +31,7 @@ const RepositoriesPage = () => {
         <div style={{
           flex: 2,
         }}>
-          {currentRepo ? currentRepo.full_name : "No repo selected" }
+          <RepositoriesDetail repository={currentRepo}/>
         </div>
       </Box>
     </CommonLayout>
