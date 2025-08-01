@@ -7,7 +7,7 @@ import {
   Typography,
   ListItemButton,
 } from "@mui/material";
-import { useRepositoriesList } from "../../hooks/repositories";
+import { useRepositoriesList } from "./hooks/repositories";
 import { Repository } from "../../apis/api";
 
 const infoBoxStyled = { display: "flex", justifyContent: "center", p: 2 };
@@ -62,8 +62,9 @@ const RepositoriesList: React.FC<RepositoriesListProps> = ({
               <ListItemButton
                 selected={repo.id === idRepoSelected}
                 onClick={(event) => handleRepoItemClick(repo)}
+                key={repo.id}
               >
-                <ListItem key={repo.id} divider>
+                <ListItem divider>
                   <ListItemText
                     primary={repo.full_name}
                     secondary={repo.description}

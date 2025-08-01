@@ -87,7 +87,7 @@ const RepositoriesDetail: React.FC<RepositioriesDetailProps> = ({
             <p style={{ fontStyle: "italic" }}>About:</p>
             <p>{repository.description}</p>
             <p style={{ fontStyle: "italic" }}>Lenguage:</p>
-            <p style={extraInfoStyle}>
+            <div style={{...extraInfoStyle, margin: '1em 0'}}>
               <Box sx={(theme) => ({
                 backgroundColor: (theme.palette as any).lenguagesColors[repository.language],
                 width: '10px',
@@ -96,7 +96,7 @@ const RepositoriesDetail: React.FC<RepositioriesDetailProps> = ({
                 marginRight: '5px',
               })} />
               {repository.language}
-            </p>
+            </div>
           </Box>
           <Box
             sx={(theme) => ({

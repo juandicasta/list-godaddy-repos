@@ -1,6 +1,6 @@
 import { useQuery, UseQueryOptions, UseQueryResult } from "@tanstack/react-query";
-import { repositories } from "../apis/requests";
-import { Repository } from '../apis/api.d';
+import { repositories } from "../../../apis/requests";
+import { Repository } from '../../../apis/api.d';
 
 type RepositoriesListOptions = UseQueryOptions<Repository[], unknown>;
 type RepositoriesListResult = UseQueryResult<Repository[], unknown>;
