@@ -40,6 +40,7 @@ A simple web application built with React and TypeScript to list public reposito
 
 ## 📁 Project Structure
 
+```
 src/
 │
 ├── apis/ # API requests and response types
@@ -56,6 +57,7 @@ src/
 │ ├── Detail.tsx # Repository detail component
 │ └── hooks/
 │ └── repositories.ts
+```
 
 ---
 
