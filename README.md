@@ -48,15 +48,16 @@ src/
 │ └── requests.ts
 │
 ├── components/ # Common UI components and overrides
+│ ├── CommonLayout.tsx
 │ └── MainTheme.ts
 │
 ├── pages/ # Page-level functionality
 │ └── repositories/
-│ ├── index.tsx # Page container
-│ ├── List.tsx # Repository list component
-│ ├── Detail.tsx # Repository detail component
-│ └── hooks/
-│ └── repositories.ts
+│   ├── index.tsx # Page container
+│   ├── List.tsx # Repository list component
+│   ├── Detail.tsx # Repository detail component
+│   └── hooks/
+│     └── repositories.ts
 ```
 
 ---
