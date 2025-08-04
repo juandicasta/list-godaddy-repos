@@ -1,6 +1,5 @@
 import { Repository } from './api.d'
-import type { AxiosStatic } from 'axios';
-const axios = require('axios') as AxiosStatic;
+import axios from 'axios'
 
 // routes
 const GoDaddyReposRoute = 'https://api.github.com/orgs/godaddy/repos'

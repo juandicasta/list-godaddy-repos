@@ -21,7 +21,8 @@ const mockRepos = [
 const RenderComponent = (
   handleCurrentRepo: Dispatch<SetStateAction<Repository | null>>,
   loading?: boolean,
-  repos?: Repository[]
+  repos?: Repository[],
+  error = false,
 ) => {
   render(
     <ThemeProvider theme={MainTheme}>
@@ -29,6 +30,7 @@ const RenderComponent = (
         handleCurrentRepo={handleCurrentRepo}
         repositories={repos}
         isLoading={!!loading}
+        hasError={error}
       />
     </ThemeProvider>
   );
@@ -49,6 +51,14 @@ describe("RepositoriesList", () => {
     RenderComponent(handleCurrentRepo, false, []);
 
     expect(screen.getByText(/No data/i)).toBeInTheDocument();
+  });
+
+  it("show error message", () => {
+    const handleCurrentRepo = jest.fn();
+
+    RenderComponent(handleCurrentRepo, false, [], true);
+
+    expect(screen.getByText(/Something went wrong. Please reload the page./i)).toBeInTheDocument();
   });
 
   it("show the repositories and select one", () => {

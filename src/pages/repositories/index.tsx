@@ -9,7 +9,7 @@ import { useRepositoriesList } from "./hooks/repositories";
 const RepositoriesPage = () => {
   const [currentRepo, setCurrentRepo] = useState<Repository | null>(null);
 
-  const { data: repositories, isLoading } = useRepositoriesList();
+  const { data: repositories, isLoading, error } = useRepositoriesList();
 
   return (
     <CommonLayout>
@@ -34,6 +34,7 @@ const RepositoriesPage = () => {
             handleCurrentRepo={setCurrentRepo}
             repositories={repositories}
             isLoading={isLoading}
+            hasError={!!error}
           />
         </div>
         <div

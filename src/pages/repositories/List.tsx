@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import {
+  Alert,
   Box,
   List,
   ListItem,
@@ -15,13 +16,14 @@ interface RepositoriesListProps {
   handleCurrentRepo: Dispatch<SetStateAction<Repository | null>>;
   repositories?: Repository[];
   isLoading: boolean;
-
+  hasError: boolean;
 }
 
 const RepositoriesList: React.FC<RepositoriesListProps> = ({
   handleCurrentRepo,
   repositories,
-  isLoading
+  isLoading,
+  hasError,
 }) => {
   const [idRepoSelected, setRepoSelected] = useState(0);
 
@@ -51,6 +53,7 @@ const RepositoriesList: React.FC<RepositoriesListProps> = ({
       >
         Repositories
       </Typography>
+      {hasError && (<Alert severity="error">Something went wrong. Please reload the page.</Alert>)}
       {isLoading ? (
         <Box sx={infoBoxStyled}>Loading...</Box>
       ) : repositories && repositories.length > 0 ? (

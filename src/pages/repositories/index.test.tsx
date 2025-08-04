@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import RepositoriesPage from "./index";
 import { Repository } from "../../apis/api";
 import { ThemeProvider } from "@mui/material/styles";
@@ -62,5 +62,23 @@ describe("RepositoriesPage", () => {
     expect(await screen.findByText("user/repo-2")).toBeInTheDocument();
 
     expect(await screen.findByText(/no repo selected/i)).toBeInTheDocument();
-  })
+  });
+
+  it("show repo detail after select one", async () => {
+    mockRepositories.index.mockResolvedValueOnce(mockRepos);
+
+    RenderComponent();
+
+    expect(await screen.findByText(/no repo selected/i)).toBeInTheDocument();
+
+    const firstRepoItem = await screen.findByText("user/repo-1");
+    fireEvent.click(firstRepoItem);
+
+    expect(await screen.findByText(/JavaScript/i)).toBeInTheDocument();
+    expect(screen.getByText(/5 forks/i)).toBeInTheDocument();
+    expect(screen.getByText(/15 issues/i)).toBeInTheDocument();
+    expect(screen.getByText(/2 watchers/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /go to repo/i })).toHaveAttribute('href', mockRepos[0].html_url);
+  });
+
 });
